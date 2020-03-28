@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Contact</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <!-- CSS LIBRARY -->
+    <link rel="stylesheet" type="text/css" href="template/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="template/css/ionicons.min.css">
+    <link rel="stylesheet" type="text/css" href="template/css/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="template/css/gallery.css">
+    <link rel="stylesheet" type="text/css" href="template/css/vit-gallery.css">
+    <link rel="stylesheet" type="text/css" href="template/css/bootstrap-select.min.css">
+    <link rel="stylesheet" type="text/css" href="template/css/bootstrap-datepicker.css"/>
+    <!-- MAIN STYLE -->
+    <link rel="stylesheet" href="template/css/styles.css">
+</head>
+
+<body>
+
+
+
+
+<!-- HEADER -->
+<header class="header-sky">
+    <!-- MENU-HEADER -->
+    <div class="menu-header">
+        <nav class="navbar navbar-fixed-top bg-menu">
+            <div class="container">
+                <div class="navbar-header ">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar "></span>
+                        <span class="icon-bar "></span>
+                        <span class="icon-bar "></span>
+                    </button>
+                    <a class="navbar-brand" href="index" title="Airbnb"><img src="layui/images/stayhome.png"
+                                                                             style=": 108px" alt="#"></a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/room_list">全部房源</a>
+                        </li>
+                        <li class="dropdown ">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">房源类型<b class="caret"></b></a>
+                            <ul class="dropdown-menu icon-fa-caret-up submenu-hover">
+                                <li><a href="/room_list?room_type=空调房">空调房</a></li>
+                                <li><a href="/room_list?room_type=大床房">大床房</a></li>
+                                <li><a href="/room_list?room_type=影音房">影音房</a></li>
+                            </ul>
+                        </li>
+                        <li th:if="${session.user == null}"><a href="login">登录</a>
+                        </li>
+                        <li th:if="${session.user == null}"><a href="register">注册</a></li>
+                        <li class="dropdown" th:if="${session.user != null}">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">我 <b class="caret"></b></a>
+                            <ul class="dropdown-menu icon-fa-caret-up submenu-hover">
+                                <li><a href="order_list">我的订单</a></li>
+                                <li><a href="logout">退出登录</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- END / MENU-HEADER -->
+</header>
+<!-- END-HEADER -->
+<section class="banner-tems text-center">
+    <div class="container">
+        <div class="banner-content">
+            <h2>评论反馈</h2>
+            <p>给您家一般温馨的体验</p>
+        </div>
+    </div>
+</section>
+    <!-- CONTACT -->
+    <section class="section-contact">
+        <div class="container">
+            <div class="contact">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="contact-form">
+                            <form action="order_comment" method="post">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <textarea cols="30" rows="10" name="message" class="field-textarea" placeholder="填写评论..."></textarea>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <button type="submit" class="btn btn-room">提交评论</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END / CONTACT -->
+    <!--FOOTER-->
+<footer class="footer-sky">
+    <!-- /footer-top -->
+    <div class="footer-mid">
+        <div class="container">
+            <div class="row padding-footer-mid">
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="footer-logo text-center list-content">
+                        <a href="index.html" title="Skyline"><img src="layui/images/stayhome.png" alt="Image"></a>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-2 col-lg-2 col-lg-offset-1 col-md-offset-1  ">
+                    <div class="list-content">
+                        <ul>
+                            <li><a href="#" title="">Site Map</a></li>
+                            <li><a href="#" title="">Term & Conditions</a></li>
+                            <li><a href="#" title="">Privacy Policy</a></li>
+                            <li><a href="#" title="">Help</a></li>
+                            <li><a href="#" title="">Affiliate</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-2 col-lg-2 col-lg-offset-1 col-md-offset-1 ">
+                    <div class="list-content ">
+                        <ul>
+                            <li><a href="#" title="">Our Location</a></li>
+                            <li><a href="#" title="">Career</a></li>
+                            <li><a href="#" title="">About Us</a></li>
+                            <li><a href="#" title="">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-2 col-lg-2 col-lg-offset-1 col-md-offset-1">
+                    <div class="list-content ">
+                        <ul>
+                            <li><a href="#" title="">FAQS</a></li>
+                            <li><a href="#" title="">News</a></li>
+                            <li><a href="#" title="">Photo & Video</a></li>
+                            <li><a href="#" title="">Restaurant</a></li>
+                            <li><a href="#" title="">Gift Card</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 no-padding">
+                    Copyright © 2020 by <a href="#" title="">stayhome.</a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 no-padding">
+                    <div class="payments text-right">
+                        <ul>
+                            <li>
+                                <a href="#" title="Paypal"><img src="template/images/Home-1/Paypal.png"
+                                                                alt="Paypal"></a>
+                            </li>
+                            <li>
+                                <a href="#" title="Visa"><img src="template/images/Home-1/Visa.png" alt="Visa"></a>
+                            </li>
+                            <li>
+                                <a href="#" title="Master"><img src="template/images/Home-1/Master-card.png"
+                                                                alt="Master"></a>
+                            </li>
+                            <li>
+                                <a href="#" title="Discover"><img src="template/images/Home-1/Discover.png"
+                                                                  alt="Discover"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+    <!-- END / FOOTER-->
+    <!--SCOLL TOP-->
+    <a href="#" title="sroll" class="scrollToTop"><i class="fa fa-angle-up"></i></a>
+    <!--END / SROLL TOP-->
+    <!-- LOAD JQUERY -->
+<script type="text/javascript" src="template/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="template/js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="template/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="template/js/vit-gallery.js"></script>
+<script type="text/javascript" src="template/js/jquery.countTo.js"></script>
+<script type="text/javascript" src="template/js/jquery.appear.min.js"></script>
+<script type="text/javascript" src="template/js/isotope.pkgd.min.js"></script>
+<script type="text/javascript" src="template/js/bootstrap-select.js"></script>
+<script type="text/javascript" src="template/js/jquery.littlelightbox.js"></script>
+<script type="text/javascript" src="template/js/bootstrap-datepicker.js"></script>
+<script src="http://ditu.google.cn/maps/api/js?key=AIzaSyBDyCxHyc8z9gMA5IlipXpt0c33Ajzqix4"></script>
+<!-- Custom jQuery -->
+<script type="text/javascript" src="template/js/sky.js"></script>
+</body>
+
+</html>

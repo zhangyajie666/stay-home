@@ -1,0 +1,341 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>房型信息</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900"
+          rel="stylesheet">
+    <!-- CSS LIBRARY -->
+    <link rel="stylesheet" type="text/css" href="template/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="template/css/ionicons.min.css">
+    <link rel="stylesheet" type="text/css" href="template/css/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="template/css/gallery.css">
+    <link rel="stylesheet" type="text/css" href="template/css/vit-gallery.css">
+    <link rel="stylesheet" type="text/css" href="template/css/bootstrap-select.min.css">
+    <link rel="stylesheet" type="text/css" href="template/css/bootstrap-datepicker.css"/>
+    <!-- MAIN STYLE -->
+    <link rel="stylesheet" href="template/css/styles.css">
+</head>
+
+<body>
+
+
+<!-- HEADER -->
+<header class="header-sky">
+    <!-- MENU-HEADER -->
+    <div class="menu-header">
+        <nav class="navbar navbar-fixed-top bg-menu">
+            <div class="container">
+                <div class="navbar-header ">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar "></span>
+                        <span class="icon-bar "></span>
+                        <span class="icon-bar "></span>
+                    </button>
+                    <a class="navbar-brand" href="index" title="Airbnb"><img src="layui/images/stayhome.png"
+                                                                             style=": 108px" alt="#"></a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/room_list">房源详情</a>
+                        </li>
+                        <li class="dropdown ">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">房源类型<b class="caret"></b></a>
+                            <ul class="dropdown-menu icon-fa-caret-up submenu-hover">
+                                <li><a href="/room_list?room_type=空调房">空调房</a></li>
+                                <li><a href="/room_list?room_type=大床房">大床房</a></li>
+                                <li><a href="/room_list?room_type=影音房">影音房</a></li>
+                            </ul>
+                        </li>
+                        <li th:if="${session.user == null}"><a href="login">登录</a>
+                        </li>
+                        <li th:if="${session.user == null}"><a href="register">注册</a></li>
+                        <li class="dropdown" th:if="${session.user != null}">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">我 <b class="caret"></b></a>
+                            <ul class="dropdown-menu icon-fa-caret-up submenu-hover">
+                                <li><a href="order_list">我的订单</a></li>
+                                <li><a href="logout">退出登录</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- END / MENU-HEADER -->
+</header>
+<!-- END-HEADER -->
+<section class="banner-tems text-center">
+    <div class="container">
+        <div class="banner-content">
+            <h2>精选房源</h2>
+            <p>给您家一般温馨的体验</p>
+        </div>
+    </div>
+</section>
+<!-- ROOM DETAIL -->
+<section class="section-product-detail">
+    <div class="container">
+        <!-- DETAIL -->
+        <div class="product-detail margin">
+            <div class="row">
+                <div class="col-lg-9">
+                    <!-- LAGER IMGAE -->
+                    <div class="wrapper">
+                        <div class="gallery3">
+                            <img th:src="${roomDetail.getPicture()}" alt="template/images/Product/img-1.jpg"
+                                 class="">
+                        </div>
+                    </div>
+                    <!-- END / LAGER IMGAE -->
+                </div>
+                <div class="col-lg-3">
+                    <!-- FORM BOOK -->
+                    <div class="product-detail_book">
+                        <div class="product-detail_total">
+                            <p class="price">
+                                <span class="amout" th:text="'￥' + ${roomDetail.getPrice()}"></span> /days
+                            </p>
+                        </div>
+                        <div class="product-detail_form">
+                            <form action="book_room" method="post">
+                                <div class="sidebar">
+                                    <!-- WIDGET CHECK AVAILABILITY -->
+                                    <div class="widget widget_check_availability">
+                                        <div class="check_availability">
+                                            <div class="check_availability-field">
+                                                <label>入住日期</label>
+                                                <div class="input-group date" data-date-format="yyyy-mm-dd"
+                                                     id="datepicker1">
+                                                    <input class="form-control wrap-box" type="text" name="arrivalDate"
+                                                           placeholder="Arrival Date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"
+                                                                                       aria-hidden="true"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="check_availability-field">
+                                                <label>退房日期</label>
+                                                <div id="datepicker2" class="input-group date"
+                                                     data-date-format="yyyy-mm-dd">
+                                                    <input class="form-control wrap-box" type="text"
+                                                           name="departureDate"
+                                                           placeholder="Departure Date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"
+                                                                                       aria-hidden="true"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="check_availability-field">
+                                                <label>成人数量</label>
+                                                <select class="awe-select" name="adultNumber">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                </select>
+                                            </div>
+                                            <div class="check_availability-field">
+                                                <label>儿童数量</label>
+                                                <select class="awe-select" name="childrenNumber">
+                                                    <option value="0">0</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END / WIDGET CHECK AVAILABILITY -->
+                                </div>
+                                <input type="hidden" th:value="${roomDetail.getId()}" name="roomId">
+                                <button class="btn btn-room btn-product"  type="submit">预订</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- END / FORM BOOK -->
+                </div>
+            </div>
+        </div>
+        <!-- END / DETAIL -->
+        <!-- TAB -->
+        <div class="product-detail_tab">
+            <div class="row">
+                <div class="col-md-3">
+                    <ul class="product-detail_tab-header">
+                        <li class="active"><a href="#overview" data-toggle="tab">房源简介</a></li>
+                        <li><a href="#amenities" data-toggle="tab">设施/服务</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-9">
+                    <div class="product-detail_tab-content tab-content">
+                        <!-- OVERVIEW -->
+                        <div class="tab-pane fade active in" id="overview">
+                            <div class="product-detail_overview">
+                                <p th:text="${roomDetail.getIntroduce()}"></p>
+                                <div class="row">
+                                    <div class="col-xs-6 col-md-4">
+                                        <h6>房源信息</h6>
+                                        <ul>
+                                            <li th:text="'人数：' + ${roomDetail.getCapacity()}">Max: 4 Person(s)</li>
+                                            <li th:text="'房间大小：' + ${roomDetail.getSize()} + '平米'">View: Ocean</li>
+                                            <li th:text="'入住时间：' + ${roomDetail.getArrivalTime()}">Size: 35 m2 / 376
+                                                ft2
+                                            </li>
+                                            <li th:text="'退房时间：' + ${roomDetail.getDepartureTime()}">Size: 35 m2 / 376
+                                                ft2
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END / OVERVIEW -->
+                        <!-- AMENITIES -->
+                        <div class="tab-pane fade" id="amenities">
+                            <div class="product-detail_amenities">
+                                <div class="row">
+                                    <div class="col-xs-6 col-lg-6">
+                                        <h6>基础设施</h6>
+                                        <ul>
+                                            <li>无线网络</li>
+                                            <li>电视</li>
+                                            <li>空调</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-xs-6 col-lg-6">
+                                        <h6>厨房用品</h6>
+                                        <ul>
+                                            <li>基本厨具</li>
+                                            <li>盘子和餐具</li>
+                                            <li>微波炉</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-xs-6 col-lg-6">
+                                        <h6>综合设施</h6>
+                                        <ul>
+                                            <li>电梯</li>
+                                            <li>付费停车位</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-xs-6 col-lg-6">
+                                        <h6>后勤</h6>
+                                        <ul>
+                                            <li>存放行李</li>
+                                            <li>预定长期住宿</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END / AMENITIES -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END / TAB -->
+
+    </div>
+</section>
+<!-- END / SHOP DETAIL -->
+<!--FOOTER-->
+<footer class="footer-sky">
+    <!-- /footer-top -->
+    <div class="footer-mid">
+        <div class="container">
+            <div class="row padding-footer-mid">
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="footer-logo text-center list-content">
+                        <a href="index.html" title="Skyline"><img src="layui/images/stayhome.png" alt="Image"></a>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-2 col-lg-2 col-lg-offset-1 col-md-offset-1  ">
+                    <div class="list-content">
+                        <ul>
+                            <li><a href="#" title="">Site Map</a></li>
+                            <li><a href="#" title="">Term & Conditions</a></li>
+                            <li><a href="#" title="">Privacy Policy</a></li>
+                            <li><a href="#" title="">Help</a></li>
+                            <li><a href="#" title="">Affiliate</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-2 col-lg-2 col-lg-offset-1 col-md-offset-1 ">
+                    <div class="list-content ">
+                        <ul>
+                            <li><a href="#" title="">Our Location</a></li>
+                            <li><a href="#" title="">Career</a></li>
+                            <li><a href="#" title="">About Us</a></li>
+                            <li><a href="#" title="">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-2 col-lg-2 col-lg-offset-1 col-md-offset-1">
+                    <div class="list-content ">
+                        <ul>
+                            <li><a href="#" title="">FAQS</a></li>
+                            <li><a href="#" title="">News</a></li>
+                            <li><a href="#" title="">Photo & Video</a></li>
+                            <li><a href="#" title="">Restaurant</a></li>
+                            <li><a href="#" title="">Gift Card</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 no-padding">
+                    Copyright © 2020 by <a href="#" title="">stayhome.</a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 no-padding">
+                    <div class="payments text-right">
+                        <ul>
+                            <li>
+                                <a href="#" title="Paypal"><img src="template/images/Home-1/Paypal.png"
+                                                                alt="Paypal"></a>
+                            </li>
+                            <li>
+                                <a href="#" title="Visa"><img src="template/images/Home-1/Visa.png" alt="Visa"></a>
+                            </li>
+                            <li>
+                                <a href="#" title="Master"><img src="template/images/Home-1/Master-card.png"
+                                                                alt="Master"></a>
+                            </li>
+                            <li>
+                                <a href="#" title="Discover"><img src="template/images/Home-1/Discover.png"
+                                                                  alt="Discover"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- END / FOOTER-->
+<!--SCOLL TOP-->
+<a href="#" title="sroll" class="scrollToTop"><i class="fa fa-angle-up"></i></a>
+<!--END / SROLL TOP-->
+<!-- LOAD JQUERY -->
+<script type="text/javascript" src="template/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="template/js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="template/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="template/js/vit-gallery.js"></script>
+<script type="text/javascript" src="template/js/jquery.countTo.js"></script>
+<script type="text/javascript" src="template/js/jquery.appear.min.js"></script>
+<script type="text/javascript" src="template/js/isotope.pkgd.min.js"></script>
+<script type="text/javascript" src="template/js/bootstrap-select.js"></script>
+<script type="text/javascript" src="template/js/jquery.littlelightbox.js"></script>
+<script type="text/javascript" src="template/js/bootstrap-datepicker.js"></script>
+<script src="http://ditu.google.cn/maps/api/js?key=AIzaSyBDyCxHyc8z9gMA5IlipXpt0c33Ajzqix4"></script>
+<!-- Custom jQuery -->
+<script type="text/javascript" src="template/js/sky.js"></script>
+</body>
+
+</html>

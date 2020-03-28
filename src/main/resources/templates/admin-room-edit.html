@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>房源管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="stylesheet" href="xadmin/css/font.css">
+    <link rel="stylesheet" href="xadmin/css/xadmin.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="xadmin/lib/layui/layui.js" charset="utf-8"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="x-body">
+    <form class="layui-form" method="post" action="admin-room-edit" enctype="multipart/form-data">
+        <div class="layui-form-item">
+            <label for="id" class="layui-form-label">
+                <span class="x-red">*</span>ID
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="id" name="id" required="" th:value="${roomDetail.getId()}" class="layui-input" disabled>
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>ID不可修改
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="introduce" class="layui-form-label">
+                <span class="x-red">*</span>介绍
+            </label>
+            <div class="layui-input-inline">
+                  <textarea type="text" th:text="${roomDetail.getIntroduce()}" id="introduce" name="introduce"
+                            required="" lay-verify="required" class="layui-textarea">
+                  </textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="price" class="layui-form-label">
+                <span class="x-red">*</span>价格
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" th:value="${roomDetail.getPrice()}" id="price" name="price" required=""
+                       lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="capacity" class="layui-form-label">
+                <span class="x-red">*</span>容纳人数
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" th:value="${roomDetail.getCapacity()}" id="capacity" name="capacity" required=""
+                       lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="size" class="layui-form-label">
+                <span class="x-red">*</span>面积（㎡）
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" th:value="${roomDetail.getSize()}" id="size" name="size" required=""
+                       lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="arrivalTime" class="layui-form-label">
+                <span class="x-red">*</span>入住时间
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" th:value="${roomDetail.getArrivalTime()}" id="arrivalTime" name="arrivalTime"
+                       required="" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="departureTime" class="layui-form-label">
+                <span class="x-red">*</span>退房时间
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" th:value="${roomDetail.getDepartureTime()}" id="departureTime" name="departureTime"
+                       required="" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="x-red">*</span>类型</label>
+            <div class="layui-input-block">
+                <input type="radio" name="type" lay-skin="primary" value="1" title="空调房"
+                       th:checked="${roomDetail.getType() == 1 ? true : false}">
+                <input type="radio" name="type" lay-skin="primary" value="2" title="大床房"
+                       th:checked="${roomDetail.getType() == 2 ? true : false}">
+                <input type="radio" name="type" lay-skin="primary" value="3" title="影音房"
+                       th:checked="${roomDetail.getType() == 3 ? true : false}">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="picture" class="layui-form-label">
+                <span class="x-red">*</span>图片
+            </label>
+            <div class="layui-input-inline">
+                <input type="file" id="picture" name="picture"
+                       accept="image/png, image/jpeg"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="submit" class="layui-form-label">
+            </label>
+            <button id="submit" class="layui-btn" lay-filter="update" lay-submit>
+                修改
+            </button>
+        </div>
+    </form>
+</div>
+<script>
+    layui.use(['form', 'layer'], function () {
+        $ = layui.jquery;
+        var form = layui.form
+            , layer = layui.layer;
+
+        //监听提交
+        form.on('submit(update)', function (obj) {
+            var formData = new FormData();
+            formData.append("id", $('#id').val());
+            formData.append("introduce", $('#introduce').val());
+            formData.append("price", $('#price').val());
+            formData.append("capacity", $('#capacity').val());
+            formData.append("size", $('#size').val());
+            formData.append("arrivalTime", $('#arrivalTime').val());
+            formData.append("departureTime", $('#departureTime').val());
+            formData.append("type", $("input[name='type']:checked").val());
+            if (typeof($('#picture')[0].files[0]) != "undefined") {
+                formData.append("picture", $('#picture')[0].files[0]);
+            }
+            $.ajax({
+                url: '/admin-room-edit',
+                type: 'post',
+                dataType:'json',
+                data: formData,
+                processData : false, // 使数据不做处理
+                contentType : false, // 不要设置Content-Type请求头
+                async: false,
+                success: function (response) {
+                    // console.log(response);
+                    if (response.status === 1) {
+                        layer.alert("修改成功", {icon: 6}, function () {
+                            // 获得frame索引
+                            var index = parent.layer.getFrameIndex(window.name);
+                            //关闭当前frame
+                            parent.layer.close(index);
+                            parent.location.reload();
+                        });
+                    } else {
+                        layer.alert(response.msg, {icon: 5});
+                    }
+                }, error: function (response) {
+                    layer.alert("错误", {icon: 5});
+                }
+            });
+            return false;
+        });
+
+
+    });
+</script>
+</body>
+</html>

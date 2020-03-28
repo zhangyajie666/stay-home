@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>入住管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="stylesheet" href="xadmin/css/font.css">
+    <link rel="stylesheet" href="xadmin/css/xadmin.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="xadmin/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="xadmin/js/xadmin.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="x-nav">
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+       href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+</div>
+<div class="x-body">
+<!--    <xblock>-->
+<!--        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>-->
+<!--        <button class="layui-btn" onclick="x_admin_show('添加用户','owner-room-add')"><i class="layui-icon"></i>添加-->
+<!--        </button>-->
+<!--        <span class="x-right" style="line-height:40px" th:text="'共有数据：' + ${listSize} + '条'">共有数据：88 条</span>-->
+<!--    </xblock>-->
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>订单ID</th>
+            <th>创建时间</th>
+            <th>顾客</th>
+            <th>入住日期</th>
+            <th>退房日期</th>
+            <th>成人数</th>
+            <th>儿童数</th>
+            <th>房间</th>
+            <th>评论</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orderList}">
+<!--            <td>-->
+<!--                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" th:attr="data-id=${roomDetail.getId()}"><i-->
+<!--                        class="layui-icon">&#xe605;</i></div>-->
+<!--            </td>-->
+            <td th:text="${order.getId()}"></td>
+            <td th:text="${#dates.format(order.getCreateTime(), 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${order.getUser().getUsername()}"></td>
+            <td th:text="${#dates.format(order.getArrivalDate(), 'yyyy-MM-dd')}"></td>
+            <td th:text="${#dates.format(order.getDepartureDate(), 'yyyy-MM-dd')}"></td>
+            <td th:text="${order.getAdultNumber()}"></td>
+            <td th:text="${order.getChildrenNumber()}"></td>
+            <td th:if="${order.getRoomDetail().getType() == 1}">空调房</td>
+            <td th:if="${order.getRoomDetail().getType() == 2}">大床房</td>
+            <td th:if="${order.getRoomDetail().getType() == 3}">影音房</td>
+            <td th:text="${order.getComment()}"></td>
+            <td><button class="layui-btn" th:onclick="check_in(this, [[${order.getId()}]]);" href="javascript:;"><i class="layui-icon"></i>入住</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+
+    /*用户-删除*/
+    function check_in(obj, id) {
+        layer.confirm('确认要办理入住吗？', function (index) {
+            //发异步删除数据
+            $.ajax({
+                url: '/owner-check-in',
+                data: {
+                  id: id
+                },
+                type: 'post',
+                async: false,
+                success: function (response) {
+                    if (response.status === 1) {
+
+                        $(obj).parents("tr").remove();
+                        layer.msg(response.msg, {icon: 1, time: 1000});
+                    } else {
+                        console.log(response);
+                        layer.msg(response.msg, {icon: 5, time: 1000});
+                    }
+
+                },
+                error: function (response) {
+                    layer.msg("错误", {icon: 5, time: 1000});
+                }
+            });
+            // $(obj).parents("tr").remove();
+            // layer.msg('已删除!',{icon:1,time:1000});
+        });
+    }
+</script>
+</body>
+
+</html>

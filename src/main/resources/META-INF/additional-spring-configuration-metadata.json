@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "picture-upload-project-path",
+      "type": "java.lang.String",
+      "description": "Description for picture-upload-project-path."
+  }
+] }

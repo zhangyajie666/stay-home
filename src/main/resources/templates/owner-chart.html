@@ -1,0 +1,84 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>后台登录</title>
+        <meta name="renderer" content="webkit|ie-comp|ie-stand">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+        <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+        <link rel="stylesheet" href="xadmin/css/font.css">
+        <link rel="stylesheet" href="xadmin/css/xadmin.css">
+    </head>
+    <body>
+        <div class="x-body">
+            <blockquote class="layui-elem-quote" th:text="'欢迎房东先生！当前时间：' + ${#dates.format(new java.util.Date(), 'yyyy-MM-dd HH:mm:ss')}">
+
+            </blockquote>
+            <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+            <div id="main" style="width: 100%;height:400px;"></div>
+            <blockquote class="layui-elem-quote">
+                注意：此处的Echarts图表库由cdn引入，需要在线才能正常使用，如想离线，请至Echarts官网下载。
+            </blockquote>
+        </div>
+        <script src="https://cdn.bootcss.com/echarts/3.3.2/echarts.min.js" charset="utf-8"></script>
+<!--        <script src="https://cdn.bootcss.com/jquery/3.4.1/core.js"></script>-->
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        var option = {
+            title: {
+                text: '访问与入住统计'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: {
+                data: ['访问次数', '入住次数']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'value',
+                boundaryGap: [0, 0.01]
+
+            },
+            yAxis: {
+                type: 'category',
+                data: []
+            },
+            series: []
+        };
+
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+     $.ajax({
+            url: "owner-chart-data",
+            type: "get",
+            async: true,
+            dataType: "json",
+            success: function (data) {
+                myChart.setOption({
+                    series: data
+                });
+            },error: function (e) {
+                console.log(e);
+            }
+        });
+
+        </script>
+    </body>
+</html>
