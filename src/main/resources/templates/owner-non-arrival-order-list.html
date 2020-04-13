@@ -44,7 +44,6 @@
             <th>成人数</th>
             <th>儿童数</th>
             <th>房间</th>
-            <th>评论</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -64,7 +63,6 @@
             <td th:if="${order.getRoomDetail().getType() == 1}">空调房</td>
             <td th:if="${order.getRoomDetail().getType() == 2}">大床房</td>
             <td th:if="${order.getRoomDetail().getType() == 3}">影音房</td>
-            <td th:text="${order.getComment()}"></td>
             <td><button class="layui-btn" th:onclick="check_in(this, [[${order.getId()}]]);" href="javascript:;"><i class="layui-icon"></i>入住</button></td>
         </tr>
         </tbody>

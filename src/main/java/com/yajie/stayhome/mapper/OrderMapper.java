@@ -28,13 +28,13 @@ public interface OrderMapper {
     @Results({
             @Result(property = "createTime", column = "create_time"),
             @Result(property = "user", column = "user_id",
-                    one = @One(select = "com.graduationproject.stayhome.mapper.UserMapper.selectById")),
+                    one = @One(select = "com.yajie.stayhome.mapper.UserMapper.selectById")),
             @Result(property = "arrivalDate", column = "arrival_date"),
             @Result(property = "departureDate", column = "departure_date"),
             @Result(property = "adultNumber", column = "adult_number"),
             @Result(property = "childrenNumber", column = "children_number"),
             @Result(property = "roomDetail", column = "room_id",
-                    one = @One(select = "com.graduationproject.stayhome.mapper.RoomDetailMapper.selectById")),
+                    one = @One(select = "com.yajie.stayhome.mapper.RoomDetailMapper.selectById")),
             @Result(property = "comment", column = "comment"),
             @Result(property = "arrivalTime", column = "arrival_time"),
             @Result(property = "departureTime", column = "departure_time")
@@ -60,13 +60,13 @@ public interface OrderMapper {
     @Results({
             @Result(property = "createTime", column = "create_time"),
             @Result(property = "user", column = "user_id",
-                    one = @One(select = "com.graduationproject.stayhome.mapper.UserMapper.selectById")),
+                    one = @One(select = "com.yajie.stayhome.mapper.UserMapper.selectById")),
             @Result(property = "arrivalDate", column = "arrival_date"),
             @Result(property = "departureDate", column = "departure_date"),
             @Result(property = "adultNumber", column = "adult_number"),
             @Result(property = "childrenNumber", column = "children_number"),
             @Result(property = "roomDetail", column = "room_id",
-                    one = @One(select = "com.graduationproject.stayhome.mapper.RoomDetailMapper.selectById")),
+                    one = @One(select = "com.yajie.stayhome.mapper.RoomDetailMapper.selectById")),
             @Result(property = "comment", column = "comment"),
             @Result(property = "arrivalTime", column = "arrival_time"),
             @Result(property = "departureTime", column = "departure_time")
@@ -82,13 +82,13 @@ public interface OrderMapper {
     @Results({
             @Result(property = "createTime", column = "create_time"),
             @Result(property = "user", column = "user_id",
-                    one = @One(select = "com.graduationproject.stayhome.mapper.UserMapper.selectById")),
+                    one = @One(select = "com.yajie.stayhome.mapper.UserMapper.selectById")),
             @Result(property = "arrivalDate", column = "arrival_date"),
             @Result(property = "departureDate", column = "departure_date"),
             @Result(property = "adultNumber", column = "adult_number"),
             @Result(property = "childrenNumber", column = "children_number"),
             @Result(property = "roomDetail", column = "room_id",
-                    one = @One(select = "com.graduationproject.stayhome.mapper.RoomDetailMapper.selectById")),
+                    one = @One(select = "com.yajie.stayhome.mapper.RoomDetailMapper.selectById")),
             @Result(property = "comment", column = "comment"),
             @Result(property = "arrivalTime", column = "arrival_time"),
             @Result(property = "departureTime", column = "departure_time")
